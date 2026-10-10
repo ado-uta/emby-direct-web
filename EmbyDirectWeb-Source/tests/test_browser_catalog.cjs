@@ -1,0 +1,11 @@
+const assert=require('node:assert/strict');
+const {filterItems,safeRecord}=require('../web/browser-catalog.js');
+const items=[{Id:'1',Name:'Alpha',Genres:['Drama','Action'],ProductionYear:2024,CommunityRating:8,People:[{Id:'p',Name:'Actor'}]},{Id:'2',Name:'Beta',Genres:['Drama'],ProductionYear:2023,CommunityRating:9}];
+assert.equal(filterItems(items,new URLSearchParams('genres=Drama&genres=Action&match=or')).TotalRecordCount,2);
+assert.equal(filterItems(items,new URLSearchParams('genres=Drama&genres=Action&match=and')).TotalRecordCount,1);
+assert.equal(filterItems(items,new URLSearchParams('year=2024&person=p')).Items[0].Id,'1');
+assert.equal(filterItems(items,new URLSearchParams('sort=rating')).Items[0].Id,'2');
+assert.equal(filterItems(items,new URLSearchParams('search=beta')).Items[0].Id,'2');
+const clean=safeRecord({Id:'1',AccessToken:'secret',Path:'/private',MediaSources:[{Container:'mkv',DirectStreamUrl:'signed'}]});
+assert.equal(clean.AccessToken,undefined);assert.equal(clean.Path,undefined);assert.equal(clean.MediaSources[0].DirectStreamUrl,undefined);
+console.log('Browser metadata filters, sorting, actor and safe persistence PASS');

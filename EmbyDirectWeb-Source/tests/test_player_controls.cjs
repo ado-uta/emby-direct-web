@@ -1,0 +1,10 @@
+const assert=require('node:assert/strict');
+const {seekTarget,preferredSubtitle}=require('../web/player-controls.js');
+assert.equal(seekTarget(3000,-5,30000),0);
+assert.equal(seekTarget(29000,5,30000),29999);
+assert.equal(seekTarget(12000,5,30000),17000);
+assert.equal(seekTarget(12000,-5,30000),7000);
+assert.equal(preferredSubtitle([{index:1,supported:false,default:true},{index:2,supported:true},{index:3,supported:true,default:true}]).index,3);
+assert.equal(preferredSubtitle([{index:1,supported:false},{index:2,supported:true}]).index,2);
+assert.equal(preferredSubtitle([]),null);
+console.log('PASS 5-second seek bounds and automatic subtitle preference');
