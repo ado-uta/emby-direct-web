@@ -1,0 +1,8 @@
+{
+  "name": "emby-direct-web",
+  "private": true,
+  "version": "0.17.0",
+  "dependencies": {
+    "@libmedia/avplayer-ui": "1.3.1"
+  }
+}
