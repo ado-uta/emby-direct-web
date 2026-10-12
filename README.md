@@ -1,19 +1,37 @@
-## 源码包说明
+# Emby Direct Web
 
-EmbyDirectWeb-Source-v0.17.zip：适合开发、修改或提交 GitHub，包含 Python 本机服务、网页源码、固定版本的播放器与 WASM 资源、构建脚本、测试和第三方许可证。解压后把 EmbyDirectWeb-Source 目录中的内容上传到仓库，不需要上传 ZIP、虚拟环境或测试产物。根目录 README 提供运行与构建步骤。
+Windows 本机 Emby / 115 网盘 302 直连网页播放器。沿用现有 Emby 地址和账号，在本机浏览器解封装与解码视频，无需服务器转码。
 
-## 便携包说明
+当前源码版本：**v0.18 测试版**。
 
-EmbyDirectWeb-Windows-v0.17.zip：Windows 直接使用版。解压后双击 EmbyDirectWeb.exe，保留 runtime 文件夹。无需安装 Python、Node 或 Docker，填写现有 Emby / 302 地址及账号即可使用。包内不包含个人连接信息或浏览器历史。
+## v0.18 修复
 
-## Release 标题
+修复拖动进度后音频排程沿用旧时钟、旧片段回调干扰新队列，造成声音撕裂、延迟和杂音的问题。跳转时停止旧片段、清理回调并重置排程时钟，视频保持原 302 直连链路。
 
-v0.17 — 年份筛选与源码发布包
+合成音轨连续三次跳转验证：过期音频排程由 113/115 个降到 0/115 个。浏览器并发播放、音轨切换、字幕切换、进度同步和 Windows 程序自检通过；真实网盘与不同设备仍需按实际播放情况验收。
 
-## Release 正文
+## 功能
 
-新增年份下拉选择，与类型、演员筛选共同生效；保留顶部播放工具栏、前后五秒跳转和默认字幕。目录及历史缓存保存在各自浏览器。
+- MP4、MKV、MPEG-TS，本机 WebCodecs / WASM 解码。
+- 类型 OR / AND 多选、年份选择、演员筛选、搜索及评分排序。
+- 媒体详情、浏览器播放历史和后台目录预加载。
+- 默认字幕，Emby 外挂及内嵌字幕切换；支持本地文本字幕。
+- 新标签播放、前进 / 后退五秒，顶部播放信息和设置，最多四个播放会话。
+- 目录与历史缓存保存在各自浏览器，不打包个人连接信息。
 
-附件分为源码包与 Windows 便携包。普通用户下载 Windows 包，开发者下载 Source 包。视频保持 115 到本机的原文件播放，不使用服务器转码。当前为测试版本，复杂编码、图片型外挂字幕和长关键帧间隔文件仍有兼容或定位限制。
+## 源码与使用说明
 
-仓库使用项目根目录 README；两个下载包建议作为 Release 附件。
+源码位于 [EmbyDirectWeb-Source](EmbyDirectWeb-Source/)，完整运行、构建与兼容性说明见 [项目 README](EmbyDirectWeb-Source/README.md)。
+
+在 Windows 安装 Python 3.11，进入源码目录后执行：
+
+```powershell
+cd EmbyDirectWeb-Source
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe launcher.py
+```
+
+便携包解压后运行 `EmbyDirectWeb.exe`，并保留 `runtime` 文件夹，无需安装 Python、Node 或 Docker。便携包可作为 GitHub Release 附件发布。
+
+第三方组件来源、许可证与可重建补丁见 [licenses](EmbyDirectWeb-Source/licenses/)。

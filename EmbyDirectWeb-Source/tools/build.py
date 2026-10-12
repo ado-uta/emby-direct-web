@@ -12,7 +12,7 @@ with zipfile.ZipFile(folder/'Source.zip','w',zipfile.ZIP_DEFLATED) as archive:
  for path in paths:archive.write(path,path.relative_to(root).as_posix())
 manifest={p.relative_to(folder).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in folder.rglob('*') if p.is_file() and p.name!='SHA256.json'}
 (folder/'SHA256.json').write_text(json.dumps(manifest,indent=2),encoding='utf-8')
-output=root/'EmbyDirectWeb-Windows-v0.17.zip'
+output=root/'EmbyDirectWeb-Windows-v0.18.zip'
 with zipfile.ZipFile(output,'w',zipfile.ZIP_DEFLATED) as archive:
  for path in folder.rglob('*'):
   if path.is_file():archive.write(path,path.relative_to(folder.parent).as_posix())

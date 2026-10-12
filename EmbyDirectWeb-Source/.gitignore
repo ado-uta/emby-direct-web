@@ -1,0 +1,13 @@
+node_modules/
+__pycache__/
+build/
+dist/
+tools/deps/
+tools/tray-deps/
+tests/samples/
+tests/artifacts/
+*.spec
+
+*.zip
+.venv/
+*.log

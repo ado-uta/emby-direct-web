@@ -2,7 +2,7 @@
 from pathlib import Path
 import zipfile
 root=Path(__file__).resolve().parents[1]
-output=root/'EmbyDirectWeb-Source-v0.17.zip'
+output=root/'EmbyDirectWeb-Source-v0.18.zip'
 paths=[root/name for name in ['core.py','server.py','catalog.py','subtitles.py','launcher.py','README.md','requirements.txt','requirements-dev.txt','.gitignore','package.json','package-lock.json']]
 paths+=list((root/'tools').glob('*.py'))+list((root/'tests').glob('test_*.py'))+list((root/'tests').glob('test_*.cjs'))
 for folder in ['web','licenses','docs']:

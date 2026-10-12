@@ -9,3 +9,5 @@ TS seek patch (0.6): forward optional directwebDurationMs from load.formatOption
 0.7 TS seek: retain up to64 observed packet-position/timestamp pairs per open demux context. Use monotonic pair interpolation/extrapolation inside current byte bounds to aim two seconds before requested timestamp. Repeated, out-of-range, missing or non-monotonic estimates fall back to interval midpoint. Upstream timestamp check/keyframe scanning remain unchanged.
 
 0.8: when at least two timestamps were observed during earlier seeks in the current demux context, apply the same bounded interpolation to the initial seek estimate too. No new file fetch, persistent index or unvalidated byte-only seek.
+
+0.18 AudioSourceBufferNode seek fix: clear/disconnect detach onended, stop and disconnect scheduled source nodes, and reset startTime. Scheduling rebases past timestamps to AudioContext.currentTime to prevent post-seek buffer overlap. Rebuildable patch in tools/audio_patch.py, applied by tools/vendor.py. Audio decode and server/video handling are unchanged. Synthetic 48kHz AC3 probe after three seeks: before 113/115 late blocks (max 773ms), after 0/115 (max 0ms).

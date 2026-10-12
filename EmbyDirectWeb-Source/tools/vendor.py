@@ -13,6 +13,8 @@ assert text.count('async destroy(){await super.destroy(),this.keyboard.destroy()
 text=text.replace('async destroy(){await super.destroy(),this.keyboard.destroy(),this.ui.destroy()}','async destroy(){this.keyboard.destroy(),this.ui.destroy(),await super.destroy()}')
 assert text.count('g.ioReader=d,g.ioWriter=f,')==1
 text=text.replace('g.ioReader=d,g.ioWriter=f,','g.ioReader=d,g.ioWriter=f,g.directwebDurationMs=e.formatOptions?.directwebDurationMs,')
+from audio_patch import patch_audio
+text=patch_audio(text)
 bundle.write_text(text,encoding='utf-8')
 ts=out/'502.avplayer.js'
 ts_text=ts.read_text(encoding='utf-8')

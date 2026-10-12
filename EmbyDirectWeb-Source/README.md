@@ -2,16 +2,20 @@
 
 面向 Windows 的 Emby / 115 网盘 302 直连网页播放器。沿用现有 Emby 的地址、账号和媒体库，让视频在本机浏览器解封装、解码和播放，无需服务器转码。
 
-当前版本：**v0.17 测试版**。优先使用 Windows Chrome 或 Edge。
+当前版本：**v0.18 测试版**。优先使用 Windows Chrome 或 Edge。
 
 ## 下载哪一个
 
 | 文件 | 用途 |
 | --- | --- |
-| `EmbyDirectWeb-Windows-v0.17.zip` | 直接使用：解压后运行 EXE，不用安装 Python、Node 或 Docker |
-| `EmbyDirectWeb-Source-v0.17.zip` | 开发或提交 GitHub：包含项目源码、网页资源、第三方播放器资源、依赖说明和测试 |
+| `EmbyDirectWeb-Windows-v0.18.zip` | 直接使用：解压后运行 EXE，不用安装 Python、Node 或 Docker |
+| `EmbyDirectWeb-Source-v0.18.zip` | 开发或提交 GitHub：包含项目源码、网页资源、第三方播放器资源、依赖说明和测试 |
 
 建议把源码放在 GitHub 仓库，把这两个 ZIP 放在同版本 Release 附件中。源码包解压后的项目内容可以直接作为仓库内容。
+
+## v0.18 音频修复
+
+修复拖动进度后音频排程沿用旧时钟、旧片段回调干扰新队列的问题。跳转时停止旧片段、移除回调并重置排程时钟，避免音频撕裂和延迟叠加。视频保持原 302 链路，不使用服务器转码。
 
 ## 功能
 
@@ -26,7 +30,7 @@
 
 ## 便携包使用
 
-1. 解压 `EmbyDirectWeb-Windows-v0.17.zip`，保留 EXE 同目录的 `runtime` 文件夹。
+1. 解压 `EmbyDirectWeb-Windows-v0.18.zip`，保留 EXE 同目录的 `runtime` 文件夹。
 2. 双击 `EmbyDirectWeb.exe`，浏览器会自动打开本机网页。
 3. 填写原 Emby / 302 地址、用户名和密码。无需填写 115 Cookie，也不需要改 HK 服务器。
 4. 进入媒体库筛选影片并播放。右下角托盘图标可重新打开页面或退出程序；关闭网页不会退出程序。
